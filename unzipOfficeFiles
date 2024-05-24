@@ -1,9 +1,5 @@
 #!/bin/bash
 
-
-# To use only with doc, ppt and xls files.
-# find . -regextype egrep -regex '.+(doc|ppt|xls)$' | xargs -d '\n' grep -Pria 'regexToSearch' --color always
-
 mkdir unzipped_files
 
 readarray -d '' files < <(find . -regextype egrep -regex '.+(docx|pptx|xlsx)$' -print0)

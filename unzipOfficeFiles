@@ -1,0 +1,16 @@
+#!/bin/bash
+
+
+# To use only with doc, ppt and xls files.
+# find . -regextype egrep -regex '.+(doc|ppt|xls)$' | xargs -d '\n' grep -Pria 'regexToSearch' --color always
+
+mkdir unzipped_files
+
+readarray -d '' files < <(find . -regextype egrep -regex '.+(docx|pptx|xlsx)$' -print0)
+
+for file in "${files[@]}"
+do
+	# To secure that each file is unique
+	filename="$(echo "$file" | perl -p -e 's/^\.\///g' | perl -p -e 's/\//~\$/g')"
+	unzip "$file" -d "unzipped_files/$filename"
+done
